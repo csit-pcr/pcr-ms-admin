@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "pcr-ms-admin",
+                "projectName": "pcr-ms-admin",
+                "workingDirectory": "c:\\Users\\branda\\Desktop\\pcr-ms-admin",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "pcr-ms-admin",
+                "projectName": "pcr-ms-admin",
+                "workingDirectory": "c:\\Users\\branda\\Desktop\\pcr-ms-admin",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
