@@ -14,51 +14,61 @@ import java.io.Serializable;
 // import java.util.Set;
 
 @Entity
-@Table(name="Approver")
+@Table(name = "Approver")
+// @IdClass(ApproverID.class)
 @EntityListeners(AuditingEntityListener.class)
-public class Approver extends EmployeeDetails implements Serializable{
+public class Approver extends EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long approver_id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long approver_id;
 
-    private String[] directorate_assigned;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long employee_no;
+    @EmbeddedId
+    private ApproverID id;
+
+    private String[] cluster_assigned;
 
     private String[] section_assigned;
 
+    // Start of Getters
 
-    //Mapping to Change Request <entity> - Child 
-    // @OneToOne(mappedBy="fk_approver_id", cascade = CascadeType.ALL)
-    // private Set <ChangeRequest> requests;
-
-    //Start of Getters
-
-    public Long getApproverID() {
-        return this.approver_id;
+    // public Long getApproverID() {
+    // return this.approver_id;
+    // }
+    public ApproverID getID() {
+        return this.id;
     }
 
-    public String[] getDirectorateAssigned() {
-        return this.directorate_assigned;
+    public String[] getClusterAssigned() {
+        return this.cluster_assigned;
     }
 
     public String[] getSectionAssigned() {
         return this.section_assigned;
     }
 
-    //Start of Setters 
+    // Start of Setters
 
-    public void setApproverID(Long approverID) {
-        this.approver_id = approverID;
+    // public void setApproverID(Long approverID) {
+    // this.approver_id = approverID;
+    // }
+
+    // Start of Setters
+
+    public void setID(ApproverID ID) {
+        this.id = ID;
     }
 
-    public void setDirectorateAssigned(String[] directorateAssigned) {
-        this.directorate_assigned = directorateAssigned;
+    public void setClusterAssigned(String[] clusterAssigned) {
+        this.cluster_assigned = clusterAssigned;
     }
 
     public void setSectionAssigned(String[] sectionAssigned) {
         this.section_assigned = sectionAssigned;
     }
-
 
 }

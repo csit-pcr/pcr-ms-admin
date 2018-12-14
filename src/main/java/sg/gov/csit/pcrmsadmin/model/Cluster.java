@@ -1,8 +1,5 @@
 package sg.gov.csit.pcrmsadmin.model;
 
-//Classes imported or used
-import sg.gov.csit.pcrmsadmin.model.EmployeeDetails;
-
 //Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,10 +8,7 @@ import javax.persistence.*;
 
 //Java imports
 import java.io.Serializable;
-import java.util.Set;
 import java.util.Date;
-import java.util.HashSet;
-
 
 
 @Entity
@@ -28,10 +22,6 @@ public class Cluster implements Serializable{
     private Long cluster_id;
 
     private String cluster_name;
-
-    // //Mapping to EmployeeDetails <entity> - Child 
-    // @OneToOne(mappedBy="cluster_id", cascade = CascadeType.ALL)
-    // private Set <EmployeeDetails> employees = new HashSet<>();
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

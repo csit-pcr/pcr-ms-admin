@@ -15,15 +15,23 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Tasker")
+// @IdClass(TaskerID.class)
 @EntityListeners(AuditingEntityListener.class)
 public class Tasker extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tasker_id ;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long tasker_id ;
 
-    private String[] directorate_assigned;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long employee_no;
+
+    @EmbeddedId
+    private TaskerID id;
+
+    private String[] cluster_assigned;
 
     private String[] section_assigned;
 
@@ -33,12 +41,16 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     //Start of Getters
 
-    public Long getTaskerID() {
-        return this.tasker_id;
-    }    
+    // public Long getTaskerID() {
+    //     return this.tasker_id;
+    // }    
 
-    public String[] getDirectorateAssigned() {
-        return this.directorate_assigned;
+    public TaskerID getID() {
+        return this.id;
+    }
+
+    public String[] getClusterAssigned() {
+        return this.cluster_assigned;
     }
 
     public String[] getSectionAssigned() {
@@ -47,12 +59,16 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     //Start of Setters
 
-    public void setTaskerID(Long taskerID) {
-        this.tasker_id = taskerID;
+    // public void setTaskerID(Long taskerID) {
+    //     this.tasker_id = taskerID;
+    // }
+
+    public void setID(TaskerID ID) {
+        this.id = ID;
     }
 
-    public void setDirectorateAssigned(String[] directorateAssigned) {
-        this.directorate_assigned = directorateAssigned;
+    public void setClusterAssigned(String[] clusterAssigned) {
+        this.cluster_assigned = clusterAssigned;
     }
 
     public void setSectionAssigned(String[] sectionAssigned) {

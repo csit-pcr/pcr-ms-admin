@@ -1,7 +1,7 @@
 package sg.gov.csit.pcrmsadmin.model;
 
 //Classes imported or used
-import sg.gov.csit.pcrmsadmin.model.EmployeeDetails;
+// import sg.gov.csit.pcrmsadmin.model.EmployeeDetails;
 
 //Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 
 //Java imports
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+// import java.util.HashSet;
+// import java.util.Set;
 
 
 @Entity
@@ -25,11 +25,11 @@ public class Section implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long section_id;
 
-    private String section_name;
+    @ManyToOne
+    @JoinColumn(name = "FK_cluster_ID")
+    private Cluster cluster;
 
-    // //Mapping to EmployeeDetails <entity> - Child 
-    // @OneToOne(mappedBy="section_id", cascade = CascadeType.ALL)
-    // private Set <EmployeeDetails> employees = new HashSet<>();
+    private String section_name;
 
     //Start of Getters
 
@@ -38,6 +38,10 @@ public class Section implements Serializable{
     }    
     public String getSectionName() {
         return this.section_name;
+    }
+
+    public Cluster getCluster() {
+        return this.cluster;
     }
 
     //Start of Setters

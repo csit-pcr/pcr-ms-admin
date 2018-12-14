@@ -19,20 +19,27 @@ import java.io.Serializable;
 public class Admin extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long admin_id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long admin_id;
+
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long employee_no;
+
+    @EmbeddedId
+    private AdminID id;
 
     //Start of Getters
 
-    public Long getAdminID() {
-        return this.admin_id;
+    public AdminID getID() {
+        return this.id;
     }
 
     //Start of Setters 
 
-    public void setApproverID(Long adminID) {
-        this.admin_id = adminID;
+    public void setID(AdminID ID) {
+        this.id = ID;
     }
 
 }
