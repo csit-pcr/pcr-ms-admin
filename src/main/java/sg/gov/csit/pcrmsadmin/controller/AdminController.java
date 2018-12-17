@@ -30,10 +30,5 @@ public class AdminController {
         return adminRepository.save(admin);
     }
 
-    // @GetMapping("/admin/{id}")
-    // public Admin getAdminById(@PathVariable(value = "id") Long adminId) {
-    //     return adminRepository.findById(adminId)
-    //             .orElseThrow(() -> new ResourceNotFoundException("Admin", "adminid", adminId));
-    // }
 
 }
