@@ -15,6 +15,10 @@ public class EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long employee_no;
+
+    @NotBlank
     private String name;
         
     // Mapping to Section <Entity>-Parent
@@ -22,6 +26,14 @@ public class EmployeeDetails implements Serializable {
     @OneToOne
     @JoinColumn(name = "FK_section_ID")
     private Section section;
+
+    public Long getEmployeeNo() {
+        return this.employee_no;
+    }
+    
+    public void setEmployeeNo(Long employeeNo) {
+        this.employee_no = employeeNo;
+    }
 
     public String getName() {
         return this.name;
@@ -35,4 +47,7 @@ public class EmployeeDetails implements Serializable {
         this.name = name;
     }
 
+    public void setSection(Section section) {
+        this.section = section;
+    }
 }

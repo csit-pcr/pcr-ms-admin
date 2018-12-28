@@ -20,20 +20,16 @@ import java.io.Serializable;
 public class Tasker extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long tasker_id ;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long tasker_id ;
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long employee_no;
+    // private String[] cluster_assigned;
 
-    @EmbeddedId
-    private TaskerID id;
-
-    private String[] cluster_assigned;
-
-    private String[] section_assigned;
+    @OneToOne
+    @JoinColumn(name = "section_assigned_ID")
+    private Section section_assigned;
+    
 
     //Mapping to Change Request <entity> - Child 
     // @OneToOne(mappedBy="fk_tasker_id", cascade = CascadeType.ALL)
@@ -41,19 +37,16 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     //Start of Getters
 
-    // public Long getTaskerID() {
-    //     return this.tasker_id;
-    // }    
 
-    public TaskerID getID() {
-        return this.id;
+    public Long getTaskerID() {
+        return this.tasker_id;
     }
 
-    public String[] getClusterAssigned() {
-        return this.cluster_assigned;
-    }
+    // public String[] getClusterAssigned() {
+    //     return this.cluster_assigned;
+    // }
 
-    public String[] getSectionAssigned() {
+    public Section getSectionAssigned() {
         return this.section_assigned;
     }
 
@@ -63,15 +56,15 @@ public class Tasker extends EmployeeDetails implements Serializable{
     //     this.tasker_id = taskerID;
     // }
 
-    public void setID(TaskerID ID) {
-        this.id = ID;
+    public void setTaskerID(Long ID) {
+        this.tasker_id = ID;
     }
 
-    public void setClusterAssigned(String[] clusterAssigned) {
-        this.cluster_assigned = clusterAssigned;
-    }
+    // public void setClusterAssigned(String[] clusterAssigned) {
+    //     this.cluster_assigned = clusterAssigned;
+    // }
 
-    public void setSectionAssigned(String[] sectionAssigned) {
+    public void setSectionAssigned(Section sectionAssigned) {
         this.section_assigned = sectionAssigned;
     }
 

@@ -14,41 +14,28 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Requestor")
-// @IdClass(RequestorID.class)
 @EntityListeners(AuditingEntityListener.class)
 public class Requestor extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long requestor_id;
-
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long employee_no;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long requestor_id;
 
     //Mapping to Change Request <entity> - Child 
     // @OneToOne(mappedBy="fk_requestor_id", cascade = CascadeType.ALL)
     // private Set <ChangeRequest> requests;
 
-    @EmbeddedId
-    private RequestorID id;
+    //Getters
 
-    public RequestorID getID() {
-        return this.id;
+    public Long getID() {
+        return this.requestor_id;
     }
 
-    public void setID(RequestorID ID) {
-        this.id = ID;
+    //Setters
+    
+    public void setID(Long ID) {
+        this.requestor_id = ID;
     }
-
-    // public Long getRequestorID() {
-    //     return this.requestor_id;
-    // }
-
-    // public void setRequestorID(Long requestorID) {
-    //     this.requestor_id = requestorID;
-    // }
-
 
 }

@@ -20,54 +20,45 @@ import java.io.Serializable;
 public class Approver extends EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long approver_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long approver_id;
+    
+    // @ManyToOne
+    // @JoinColumn(name = "cluster_assigned_ID")
+    // private Cluster cluster_assigned;
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long employee_no;
-    @EmbeddedId
-    private ApproverID id;
-
-    private String[] cluster_assigned;
-
-    private String[] section_assigned;
-
+    
+    @OneToOne
+    @JoinColumn(name = "section_assigned_ID")
+    private Section section_assigned;
+    
     // Start of Getters
 
-    // public Long getApproverID() {
-    // return this.approver_id;
+    public Long getApproverID() {
+        return this.approver_id;
+    }
+
+    // public Cluster getClusterAssigned() {
+    //     return this.cluster_assigned;
     // }
-    public ApproverID getID() {
-        return this.id;
-    }
 
-    public String[] getClusterAssigned() {
-        return this.cluster_assigned;
-    }
-
-    public String[] getSectionAssigned() {
+    public Section getSectionAssigned() {
         return this.section_assigned;
     }
 
     // Start of Setters
 
-    // public void setApproverID(Long approverID) {
-    // this.approver_id = approverID;
+    public void setApproverID(Long ID) {
+        this.approver_id = ID;
+    }
+
+    // public void setClusterAssigned(Cluster clusterAssigned) {
+    //     this.cluster_assigned = clusterAssigned;
     // }
 
-    // Start of Setters
 
-    public void setID(ApproverID ID) {
-        this.id = ID;
-    }
-
-    public void setClusterAssigned(String[] clusterAssigned) {
-        this.cluster_assigned = clusterAssigned;
-    }
-
-    public void setSectionAssigned(String[] sectionAssigned) {
+    public void setSectionAssigned(Section sectionAssigned) {
         this.section_assigned = sectionAssigned;
     }
 

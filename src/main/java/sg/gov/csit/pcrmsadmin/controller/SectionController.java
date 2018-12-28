@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*") //This allows access to the frontend with any origin
 @RequestMapping("/api")
 public class SectionController {
 
@@ -25,7 +26,7 @@ public class SectionController {
 
     // Create a new Note
     @PostMapping("/section")
-    public Section createCluster(@Valid @RequestBody Section section) {
+    public Section createSection(@Valid @RequestBody Section section) {
         return sectionRepository.save(section);
     }
 
@@ -35,4 +36,31 @@ public class SectionController {
                 .orElseThrow(() -> new ResourceNotFoundException("Section", "sectionid", sectionId));
     }
 
+    // Update a Note
+    @PutMapping("/section/{id}")
+    public Section updateSection(@PathVariable(value = "id") Long sectionId,
+            @Valid @RequestBody Section sectionDetails) {
+        Section section = sectionRepository.findById(sectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Section", "sectionid", sectionId));
+
+        section.setSectionName(sectionDetails.getSectionName());
+        section.setValidFrom(sectionDetails.getValidFrom());
+        section.setValidTo(sectionDetails.getValidTo());
+
+        Section updatedSection = sectionRepository.save(section);
+
+        return updatedSection;
+    }
+
+    // Delete a Note
+    @DeleteMapping("/section/{id}")
+    public ResponseEntity<?> deleteSection(@PathVariable(value = "id") Long sectionId) {
+        Section section = sectionRepository.findById(sectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Section", "sectionId", sectionId));
+
+        sectionRepository.delete(section);
+
+        return ResponseEntity.ok().build();
+
+    }
 }

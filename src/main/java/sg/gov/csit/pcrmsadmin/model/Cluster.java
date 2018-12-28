@@ -5,6 +5,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 //Javax imports
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 //Java imports
 import java.io.Serializable;

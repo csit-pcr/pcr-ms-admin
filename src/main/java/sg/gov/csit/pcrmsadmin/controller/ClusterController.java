@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*") //This allows access to the frontend with any origin
 @RequestMapping("/api")
 public class ClusterController {
 
@@ -35,4 +36,31 @@ public class ClusterController {
                 .orElseThrow(() -> new ResourceNotFoundException("Cluster", "clusterid", clusterId));
     }
 
+    // Update a Note
+    @PutMapping("/cluster/{id}")
+    public Cluster updateCluster(@PathVariable(value = "id") Long clusterId,
+            @Valid @RequestBody Cluster clusterDetails) {
+        Cluster cluster = clusterRepository.findById(clusterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cluster", "clusterid", clusterId));
+
+        cluster.setClusterName(clusterDetails.getClusterName());
+        cluster.setValidFrom(clusterDetails.getValidFrom());
+        cluster.setValidTo(clusterDetails.getValidTo());
+
+        Cluster updatedCluster = clusterRepository.save(cluster);
+
+        return updatedCluster;
+    }
+
+    // Delete a Note
+    @DeleteMapping("/cluster/{id}")
+    public ResponseEntity<?> deleteCluster(@PathVariable(value = "id") Long clusterId) {
+        Cluster cluster = clusterRepository.findById(clusterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cluster", "clusterId", clusterId));
+
+        clusterRepository.delete(cluster);
+
+        return ResponseEntity.ok().build();
+
+    }
 }
