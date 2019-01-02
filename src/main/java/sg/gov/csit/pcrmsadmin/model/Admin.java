@@ -25,13 +25,13 @@ public class Admin extends EmployeeDetails implements Serializable{
 
     //Start of Getters
 
-    public Long getID() {
+    public Long getAdminID() {
         return this.admin_id;
     }
 
     //Start of Setters 
 
-    public void setID(Long ID) {
+    public void setAdminID(Long ID) {
         this.admin_id= ID;
     }
 

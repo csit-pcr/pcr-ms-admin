@@ -28,13 +28,13 @@ public class Requestor extends EmployeeDetails implements Serializable{
 
     //Getters
 
-    public Long getID() {
+    public Long getRequestorID() {
         return this.requestor_id;
     }
 
     //Setters
     
-    public void setID(Long ID) {
+    public void setRequestorID(Long ID) {
         this.requestor_id = ID;
     }
 
