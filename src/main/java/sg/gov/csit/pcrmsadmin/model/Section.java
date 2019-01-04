@@ -71,6 +71,10 @@ public class Section implements Serializable{
         this.section_name = sectionName;
     }
 
+    public Cluster setCluster(Cluster cluster) {
+        return this.cluster = cluster;
+    }
+
     public void setValidFrom(Date validFrom) {
         this.valid_from = validFrom;
     }

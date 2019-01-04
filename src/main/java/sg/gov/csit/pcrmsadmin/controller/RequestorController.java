@@ -1,10 +1,12 @@
 package sg.gov.csit.pcrmsadmin.controller;
 
 import sg.gov.csit.pcrmsadmin.model.Requestor;
+import sg.gov.csit.pcrmsadmin.model.Section;
+import sg.gov.csit.pcrmsadmin.model.EmployeeDTO;
 import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
 import sg.gov.csit.pcrmsadmin.repository.*;
 
-import org.aspectj.lang.annotation.RequiredTypes;
+// import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class RequestorController {
 
     @Autowired
     RequestorRepository requestorRepository;
+    @Autowired
+    SectionRepository sectionRepository;
 
     // Get All Notes
     @GetMapping("/requestor")
@@ -29,12 +33,18 @@ public class RequestorController {
 
     // Create a new Note
     @PostMapping("/requestor")
-    public Requestor createRequestor(@Valid @RequestBody Requestor requestor) {
+    public Requestor createRequestor(@Valid @RequestBody EmployeeDTO employee) {
+        Section section = sectionRepository.findById(employee.getSection()).get();
+        Requestor requestor = new Requestor();
+
+        requestor.setName(employee.getName());
+        requestor.setEmployeeNo(employee.getEmployeeNo());
+        requestor.setSection(section);
         return requestorRepository.save(requestor);
     }
 
     @GetMapping("/requestor/{id}")
-    public Requestor getClusterById(@PathVariable(value = "id") Long requestorId) {
+    public Requestor getRequestorById(@PathVariable(value = "id") Long requestorId) {
         return requestorRepository.findById(requestorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Requestor", "requestorid", requestorId));
     }

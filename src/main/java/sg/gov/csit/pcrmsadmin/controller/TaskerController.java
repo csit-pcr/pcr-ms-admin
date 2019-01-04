@@ -1,6 +1,8 @@
 package sg.gov.csit.pcrmsadmin.controller;
 
 import sg.gov.csit.pcrmsadmin.model.Tasker;
+import sg.gov.csit.pcrmsadmin.model.Section;
+import sg.gov.csit.pcrmsadmin.model.EmployeeDTO;
 import sg.gov.csit.pcrmsadmin.repository.*;
 import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class TaskerController {
 
     @Autowired
     TaskerRepository taskerRepository;
+    @Autowired
+    SectionRepository sectionRepository;
 
     // Get All Data
     @GetMapping("/tasker")
@@ -26,13 +30,23 @@ public class TaskerController {
 
     // Create a new tasker
     @PostMapping("/tasker")
-    public Tasker createtasker(@Valid @RequestBody Tasker tasker) {
+    public Tasker createTasker(@Valid @RequestBody EmployeeDTO employee) {
+        Section section = sectionRepository.findById(employee.getSection()).get();
+        Section sectionAssigned = sectionRepository.findById(employee.getSectionAssigned()).get();
+        Tasker tasker = new Tasker();
+
+        tasker.setName(employee.getName());
+        tasker.setEmployeeNo(employee.getEmployeeNo());
+        tasker.setSection(section);
+        tasker.setSectionAssigned(sectionAssigned);
+
         return taskerRepository.save(tasker);
     }
 
+
     // Search tasker by id
     @GetMapping("/tasker/{id}")
-    public Tasker getApproverById(@PathVariable(value = "id") Long taskerId) {
+    public Tasker getTaskerById(@PathVariable(value = "id") Long taskerId) {
         return taskerRepository.findById(taskerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tasker", "taskerid", taskerId));
     }

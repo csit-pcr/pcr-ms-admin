@@ -1,6 +1,8 @@
 package sg.gov.csit.pcrmsadmin.controller;
 
 import sg.gov.csit.pcrmsadmin.model.Admin;
+import sg.gov.csit.pcrmsadmin.model.Section;
+import sg.gov.csit.pcrmsadmin.model.EmployeeDTO;
 import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
 import sg.gov.csit.pcrmsadmin.repository.*;
 
@@ -19,6 +21,8 @@ public class AdminController {
 
     @Autowired
     AdminRepository adminRepository;
+    @Autowired
+    SectionRepository sectionRepository;
 
     // Get All Notes
     @GetMapping("/admin")
@@ -28,12 +32,18 @@ public class AdminController {
 
     // Create a new Note
     @PostMapping("/admin")
-    public Admin createAdmin(@Valid @RequestBody Admin admin) {
+    public Admin createAdmin(@Valid @RequestBody EmployeeDTO employee) {
+        Section section = sectionRepository.findById(employee.getSection()).get();
+        Admin admin = new Admin();
+
+        admin.setName(employee.getName());
+        admin.setEmployeeNo(employee.getEmployeeNo());
+        admin.setSection(section);
         return adminRepository.save(admin);
     }
 
     @GetMapping("/admin/{id}")
-    public Admin getClusterById(@PathVariable(value = "id") Long adminId) {
+    public Admin getAdminById(@PathVariable(value = "id") Long adminId) {
         return adminRepository.findById(adminId)
                 .orElseThrow(() -> new ResourceNotFoundException("Admin", "adminid", adminId));
     }

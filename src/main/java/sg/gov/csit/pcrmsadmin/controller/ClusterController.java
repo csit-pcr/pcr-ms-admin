@@ -20,7 +20,7 @@ public class ClusterController {
 
     // Get All Notes
     @GetMapping("/cluster")
-    public List<Cluster> getAllNotes() {
+    public List<Cluster> getAllClusters() {
         return clusterRepository.findAll();
     }
 
@@ -34,6 +34,11 @@ public class ClusterController {
     public Cluster getClusterById(@PathVariable(value = "id") Long clusterId) {
         return clusterRepository.findById(clusterId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cluster", "clusterid", clusterId));
+    }
+
+    @GetMapping("/cluster/ByName/{name}")
+    public Cluster getClusterByName(@PathVariable(value = "name") String clusterName) {
+        return clusterRepository.findClusterByClusterName(clusterName);
     }
 
     // Update a Note

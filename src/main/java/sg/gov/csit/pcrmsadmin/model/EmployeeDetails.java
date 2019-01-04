@@ -13,8 +13,7 @@ import java.io.Serializable;
 @MappedSuperclass
 public class EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @NotBlank
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employee_no;
 
@@ -51,3 +50,4 @@ public class EmployeeDetails implements Serializable {
         this.section = section;
     }
 }
+

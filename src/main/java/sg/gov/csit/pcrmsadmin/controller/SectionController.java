@@ -1,6 +1,8 @@
 package sg.gov.csit.pcrmsadmin.controller;
 
 import sg.gov.csit.pcrmsadmin.model.Section;
+import sg.gov.csit.pcrmsadmin.model.Cluster;
+import sg.gov.csit.pcrmsadmin.model.DeptDTO;
 import sg.gov.csit.pcrmsadmin.repository.*;
 import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class SectionController {
 
     @Autowired
     SectionRepository sectionRepository;
+    @Autowired
+    ClusterRepository clusterRepository;
 
     // Get All Notes
     @GetMapping("/section")
@@ -24,16 +28,27 @@ public class SectionController {
         return sectionRepository.findAll();
     }
 
-    // Create a new Note
     @PostMapping("/section")
-    public Section createSection(@Valid @RequestBody Section section) {
+    public Section createSection(@Valid @RequestBody DeptDTO dept ) {
+        Cluster cluster = clusterRepository.findById(dept.getCluster()).get();
+        Section section = new Section();
+
+        section.setSectionName(dept.getSectionName());
+        section.setCluster(cluster);
+        section.setValidTo(dept.getValidTo());
+        section.setValidFrom(dept.getValidFrom());
+
         return sectionRepository.save(section);
     }
-
     @GetMapping("/section/{id}")
     public Section getSectionById(@PathVariable(value = "id") Long sectionId) {
         return sectionRepository.findById(sectionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Section", "sectionid", sectionId));
+    }
+
+    @GetMapping("/section/ByName/{name}")
+    public Section getSectionByName(@PathVariable(value = "name") String sectionName) {
+        return sectionRepository.findSectionBySectionName(sectionName);
     }
 
     // Update a Note
