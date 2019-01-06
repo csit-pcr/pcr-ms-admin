@@ -1,3 +1,5 @@
+//FIXME - To simplify, Consider deleting this model
+
 package sg.gov.csit.pcrmsadmin.model;
 
 //Classes imports
@@ -23,6 +25,8 @@ public class Assignee extends EmployeeDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assignee_id ;
+
+    //TODO - Consider creating default constructor and constructor that takes in Employee
 
     // Mapping to Change Request <entity> - Child
     // @OneToOne(mappedBy="fk_assignee_id", cascade = CascadeType.ALL)

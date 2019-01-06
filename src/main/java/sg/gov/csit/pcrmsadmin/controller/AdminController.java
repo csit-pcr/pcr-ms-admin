@@ -24,6 +24,8 @@ public class AdminController {
     @Autowired
     SectionRepository sectionRepository;
 
+
+    //FIXME - should assign a better better name: e.g. getAllAdmins
     // Get All Notes
     @GetMapping("/admin")
     public List<Admin> getAllNotes() {

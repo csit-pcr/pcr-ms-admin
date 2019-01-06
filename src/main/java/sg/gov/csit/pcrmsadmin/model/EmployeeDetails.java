@@ -1,3 +1,5 @@
+//FIXME - consider rename to Employee and convert this to an entity
+
 package sg.gov.csit.pcrmsadmin.model;
 
 //Spring imports

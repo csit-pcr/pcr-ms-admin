@@ -1,3 +1,5 @@
+//FIXME - Refer to https://vladmihalcea.com/the-best-way-to-use-entity-inheritance-with-jpa-and-hibernate/
+
 package sg.gov.csit.pcrmsadmin.model;
 
 //Classes imported or used
@@ -29,7 +31,6 @@ public class Tasker extends EmployeeDetails implements Serializable{
     @OneToOne
     @JoinColumn(name = "section_assigned_ID")
     private Section section_assigned;
-    
 
     //Mapping to Change Request <entity> - Child 
     // @OneToOne(mappedBy="fk_tasker_id", cascade = CascadeType.ALL)

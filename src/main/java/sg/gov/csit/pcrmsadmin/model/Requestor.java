@@ -1,3 +1,5 @@
+//FIXME - To simplify, Consider deleting this model
+
 package sg.gov.csit.pcrmsadmin.model;
 //Classes imported or used
 import sg.gov.csit.pcrmsadmin.model.EmployeeDetails;
@@ -26,6 +28,8 @@ public class Requestor extends EmployeeDetails implements Serializable{
     // @OneToOne(mappedBy="fk_requestor_id", cascade = CascadeType.ALL)
     // private Set <ChangeRequest> requests;
 
+
+    //TODO - Consider creating default constructor and constructor that takes in Employee
     //Getters
 
     public Long getRequestorID() {

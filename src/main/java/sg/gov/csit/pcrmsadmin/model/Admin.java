@@ -1,3 +1,5 @@
+//FIXME - Refer to https://vladmihalcea.com/the-best-way-to-use-entity-inheritance-with-jpa-and-hibernate/
+
 package sg.gov.csit.pcrmsadmin.model;
 
 //Classes that are imported or used

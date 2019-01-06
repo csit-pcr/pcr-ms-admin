@@ -1,3 +1,5 @@
+//FIXME - We need to re-evaluate if we really require this.
+
 package sg.gov.csit.pcrmsadmin.model;
 
 //This is to insert employee details for all roles

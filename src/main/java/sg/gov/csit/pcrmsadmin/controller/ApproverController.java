@@ -23,6 +23,7 @@ public class ApproverController {
     @Autowired
     SectionRepository sectionRepository;
 
+    //FIXME - should assign a better better name: e.g. getAllApproval
     // Get All Notes
     @GetMapping("/approver")
     public List<Approver> getAllNotes() {
