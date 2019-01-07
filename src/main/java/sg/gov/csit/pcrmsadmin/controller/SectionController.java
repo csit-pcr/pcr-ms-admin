@@ -24,8 +24,13 @@ public class SectionController {
 
     // Get All Notes
     @GetMapping("/section")
-    public List<Section> getAllNotes() {
+    public List<Section> getAllSections() {
         return sectionRepository.findAll();
+    }
+
+    @GetMapping("/section/names")
+    public List<Section> getAllSectionNames() {
+        return sectionRepository.findSectionNames();
     }
 
     @PostMapping("/section")

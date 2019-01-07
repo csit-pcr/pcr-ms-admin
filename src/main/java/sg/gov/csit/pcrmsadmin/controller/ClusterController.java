@@ -18,13 +18,20 @@ public class ClusterController {
     @Autowired
     ClusterRepository clusterRepository;
 
-    // Get All Notes
+    // Get All Clusters
     @GetMapping("/cluster")
     public List<Cluster> getAllClusters() {
         return clusterRepository.findAll();
     }
 
-    // Create a new Note
+    //Get all Cluster Names that have not expired
+    @GetMapping("/cluster/names")
+    public List<Cluster> getAllClusterNames() {
+        return clusterRepository.findClusterNames();
+    }
+
+
+    // Create a new Cluster
     @PostMapping("/cluster")
     public Cluster createCluster(@Valid @RequestBody Cluster cluster) {
         return clusterRepository.save(cluster);
