@@ -17,13 +17,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Tasker")
-// @IdClass(TaskerID.class)
 @EntityListeners(AuditingEntityListener.class)
 public class Tasker extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tasker_id ;
 
     // private String[] cluster_assigned;

@@ -28,10 +28,18 @@ public class SectionController {
         return sectionRepository.findAll();
     }
 
+    //Get the section names that are still used
+    @GetMapping("/section/nonExpiredNames")
+    public List<Section> getAllNonExpiredSectionNames() {
+        return sectionRepository.findNonExpiredSectionNames();
+    }
+
+    //Get all section names
     @GetMapping("/section/names")
     public List<Section> getAllSectionNames() {
         return sectionRepository.findSectionNames();
     }
+
 
     @PostMapping("/section")
     public Section createSection(@Valid @RequestBody DeptDTO dept ) {

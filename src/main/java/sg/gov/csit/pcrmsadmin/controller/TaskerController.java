@@ -31,13 +31,12 @@ public class TaskerController {
     // Create a new tasker
     @PostMapping("/tasker")
     public Tasker createTasker(@Valid @RequestBody EmployeeDTO employee) {
-        Section section = sectionRepository.findById(employee.getSection()).get();
         Section sectionAssigned = sectionRepository.findById(employee.getSectionAssigned()).get();
         Tasker tasker = new Tasker();
 
-        tasker.setName(employee.getName());
-        tasker.setEmployeeNo(employee.getEmployeeNo());
-        tasker.setSection(section);
+
+        tasker.setEmployeeID(employee.getEmployeeID());
+        tasker.setTaskerID(employee.getTaskerID());
         tasker.setSectionAssigned(sectionAssigned);
 
         return taskerRepository.save(tasker);

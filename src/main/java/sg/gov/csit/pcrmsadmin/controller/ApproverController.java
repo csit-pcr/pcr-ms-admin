@@ -23,43 +23,40 @@ public class ApproverController {
     @Autowired
     SectionRepository sectionRepository;
 
-    //FIXME - should assign a better better name: e.g. getAllApproval
-    // Get All Notes
+    // Get All Approvers
     @GetMapping("/approver")
-    public List<Approver> getAllNotes() {
+    public List<Approver> getAllApprovers() {
         return approverRepository.findAll();
     }
 
-    // Create a new Note
+    // Create a new Approver
     @PostMapping("/approver")
     public Approver createApprover(@Valid @RequestBody EmployeeDTO employee) {
-        Section section = sectionRepository.findById(employee.getSection()).get();
         Section sectionAssigned = sectionRepository.findById(employee.getSectionAssigned()).get();
         Approver approver = new Approver();
 
-        approver.setName(employee.getName());
-        approver.setEmployeeNo(employee.getEmployeeNo());
-        approver.setSection(section);
+        approver.setEmployeeID(employee.getEmployeeID());
+        approver.setApproverID(employee.getApproverID());
         approver.setSectionAssigned(sectionAssigned);
 
         return approverRepository.save(approver);
     }
 
     @GetMapping("/approver/{id}")
-    public Approver getApproverById(@PathVariable(value = "id") Long approverId) {
-        return approverRepository.findById(approverId)
-                .orElseThrow(() -> new ResourceNotFoundException("Approver", "approverid", approverId));
+    public Approver getApproverById(@PathVariable(value = "id")  String employeeId) {
+        return approverRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Approver", "employeeid", employeeId));
     }
 
     // Update a Note
     @PutMapping("/approver/{id}")
-    public Approver updateApprover(@PathVariable(value = "id") Long approverId,
+    public Approver updateApprover(@PathVariable(value = "id")  String employeeId,
             @Valid @RequestBody Approver approverDetails) {
-        Approver approver = approverRepository.findById(approverId)
-                .orElseThrow(() -> new ResourceNotFoundException("Approver", "approverid", approverId));
+        Approver approver = approverRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Approver", "approverid", employeeId));
         
         approver.setName(approverDetails.getName());
-        approver.setEmployeeNo(approverDetails.getEmployeeNo());
+        approver.setEmployeeID(approverDetails.getEmployeeID());
         approver.setSectionAssigned(approverDetails.getSectionAssigned());
         approver.setSection(approverDetails.getSection());
 
@@ -70,9 +67,9 @@ public class ApproverController {
 
     // Delete a Note
     @DeleteMapping("/approver/{id}")
-    public ResponseEntity<?> deleteApprover(@PathVariable(value = "id") Long approverId) {
-        Approver approver = approverRepository.findById(approverId)
-                .orElseThrow(() -> new ResourceNotFoundException("Approver", "approverId", approverId));
+    public ResponseEntity<?> deleteApprover(@PathVariable(value = "id") String employeeId) {
+        Approver approver = approverRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Approver", "employeeId", employeeId));
 
         approverRepository.delete(approver);
 

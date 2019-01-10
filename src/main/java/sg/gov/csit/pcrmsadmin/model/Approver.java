@@ -22,8 +22,6 @@ import java.io.Serializable;
 public class Approver extends EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long approver_id;
     
     // @ManyToOne

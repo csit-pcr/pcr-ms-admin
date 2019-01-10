@@ -24,23 +24,19 @@ public class AdminController {
     @Autowired
     SectionRepository sectionRepository;
 
-
-    //FIXME - should assign a better better name: e.g. getAllAdmins
-    // Get All Notes
+    // Get All Admins
     @GetMapping("/admin")
-    public List<Admin> getAllNotes() {
+    public List<Admin> getAllAdmins() {
         return adminRepository.findAll();
     }
 
     // Create a new Note
     @PostMapping("/admin")
     public Admin createAdmin(@Valid @RequestBody EmployeeDTO employee) {
-        Section section = sectionRepository.findById(employee.getSection()).get();
         Admin admin = new Admin();
 
-        admin.setName(employee.getName());
-        admin.setEmployeeNo(employee.getEmployeeNo());
-        admin.setSection(section);
+        admin.setEmployeeID(employee.getEmployeeID());
+        admin.setAdminID(employee.getAdminID());
         return adminRepository.save(admin);
     }
 

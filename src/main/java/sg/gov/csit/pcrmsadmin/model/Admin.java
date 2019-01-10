@@ -21,8 +21,6 @@ import java.io.Serializable;
 public class Admin extends EmployeeDetails implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long admin_id;
 
     //Start of Getters

@@ -2,38 +2,61 @@
 
 package sg.gov.csit.pcrmsadmin.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
+
 //Spring imports
 // import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 //Javax imports
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-//Java imports
-import java.io.Serializable;
+import sg.gov.csit.pcrmsadmin.config.Roles;
 
-@MappedSuperclass
-public class EmployeeDetails implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employee_no;
+@Entity
+@Table(name = "employeeDetails")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class EmployeeDetails {
+    // private static final long serialVersionUID = 1L;
+
+    @Id
+    private String employee_id;
 
     @NotBlank
+    @Column(name = "name")
     private String name;
-        
+
     // Mapping to Section <Entity>-Parent
 
     @OneToOne
     @JoinColumn(name = "FK_section_ID")
     private Section section;
 
-    public Long getEmployeeNo() {
-        return this.employee_no;
+    @ElementCollection(targetClass = Roles.class)
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "employee_id"))
+    @Column(name = "rolesOfPCR", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> roles = new HashSet<>();
+
+    public Set<Roles> getRoles() {
+        return this.roles;
     }
-    
-    public void setEmployeeNo(Long employeeNo) {
-        this.employee_no = employeeNo;
+
+    public String getEmployeeID() {
+        return this.employee_id;
     }
 
     public String getName() {
@@ -43,7 +66,11 @@ public class EmployeeDetails implements Serializable {
     public Section getSection() {
         return this.section;
     }
-    
+
+    public void setEmployeeID(String employeeID) {
+        this.employee_id = employeeID;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -51,5 +78,8 @@ public class EmployeeDetails implements Serializable {
     public void setSection(Section section) {
         this.section = section;
     }
-}
 
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+}

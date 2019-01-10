@@ -16,6 +16,9 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
 
     //To retrieve all the section's name that has not expired
     @Query("SELECT section_name FROM Section WHERE valid_to > GETDATE() ")
-    public List<Section> findSectionNames();
+    public List<Section> findNonExpiredSectionNames();
 
+    //To retrieve all the section names
+    @Query("SELECT section_name FROM Section")
+    public List<Section> findSectionNames();
 }
