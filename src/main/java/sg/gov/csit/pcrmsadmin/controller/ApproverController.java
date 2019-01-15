@@ -1,20 +1,30 @@
 package sg.gov.csit.pcrmsadmin.controller;
 
-import sg.gov.csit.pcrmsadmin.model.Approver;
-import sg.gov.csit.pcrmsadmin.model.Section;
-import sg.gov.csit.pcrmsadmin.model.EmployeeDTO;
-import sg.gov.csit.pcrmsadmin.repository.*;
-import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.Valid;
-import java.util.List;
+
+import sg.gov.csit.pcrmsadmin.exception.ResourceNotFoundException;
+import sg.gov.csit.pcrmsadmin.model.Approver;
+import sg.gov.csit.pcrmsadmin.model.EmployeeDTO;
+import sg.gov.csit.pcrmsadmin.model.Section;
+import sg.gov.csit.pcrmsadmin.repository.ApproverRepository;
+import sg.gov.csit.pcrmsadmin.repository.SectionRepository;
 
 @RestController
-@CrossOrigin(origins = "*") //This allows access to the frontend with any origin
+@CrossOrigin(origins = "*") // This allows access to the frontend with any origin
 @RequestMapping("/api")
 public class ApproverController {
 
@@ -45,7 +55,7 @@ public class ApproverController {
     @GetMapping("/approver/{id}")
     public Approver getApproverById(@PathVariable(value = "id")  String employeeId) {
         return approverRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Approver", "employeeid", employeeId));
+                .orElseThrow(() -> new ResourceNotFoundException("Approver", "employeeId", employeeId));
     }
 
     // Update a Note
@@ -53,19 +63,16 @@ public class ApproverController {
     public Approver updateApprover(@PathVariable(value = "id")  String employeeId,
             @Valid @RequestBody Approver approverDetails) {
         Approver approver = approverRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Approver", "approverid", employeeId));
+                .orElseThrow(() -> new ResourceNotFoundException("Approver", "employeeId", employeeId));
         
-        approver.setName(approverDetails.getName());
-        approver.setEmployeeID(approverDetails.getEmployeeID());
         approver.setSectionAssigned(approverDetails.getSectionAssigned());
-        approver.setSection(approverDetails.getSection());
 
         Approver updatedApprover = approverRepository.save(approver);
 
         return updatedApprover;
     }
 
-    // Delete a Note
+    //Delete a Note
     @DeleteMapping("/approver/{id}")
     public ResponseEntity<?> deleteApprover(@PathVariable(value = "id") String employeeId) {
         Approver approver = approverRepository.findById(employeeId)
@@ -76,4 +83,5 @@ public class ApproverController {
         return ResponseEntity.ok().build();
 
     }
+
 }

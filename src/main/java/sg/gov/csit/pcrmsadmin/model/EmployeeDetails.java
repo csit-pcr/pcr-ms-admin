@@ -24,11 +24,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import sg.gov.csit.pcrmsadmin.config.Roles;
 
 @Entity
 @Table(name = "employeeDetails")
 @Inheritance(strategy = InheritanceType.JOINED)
+// @OnDelete(action = OnDeleteAction.NO_ACTION)
 public class EmployeeDetails {
     // private static final long serialVersionUID = 1L;
 

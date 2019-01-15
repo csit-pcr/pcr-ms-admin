@@ -1,5 +1,6 @@
 -- INSERT INTO employee_details (employee_id, name, fk_section_id ) VALUES ('emp1', 'Damian', 1);
 -- INSERT INTO employee_details (employee_id, name, fk_section_id ) VALUES ('emp2', 'Darren', 2);
+-- INSERT INTO employee_details (employee_id, name, fk_section_id ) VALUES ('emp2', 'Eileen', 3);
 
 -- INSERT INTO cluster (cluster_name, valid_from, valid_to) VALUES ('SAS', '2011-03-02', '2019-04-09');
 -- INSERT INTO cluster (cluster_name, valid_from, valid_to) VALUES ('ACL', '2000-09-12', '2020-07-11');

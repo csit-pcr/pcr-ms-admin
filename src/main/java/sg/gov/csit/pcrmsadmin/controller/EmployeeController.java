@@ -43,6 +43,11 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
+    @GetMapping("/employee/names")
+    public List<EmployeeDetails> getAllEmployeeNames() {
+        return employeeRepository.findEmployeeNames();
+    }
+
     // Create a new Note
     @PostMapping("/employee")
     public EmployeeDetails createEmployee(@Valid @RequestBody EmployeeDTO employee) {
